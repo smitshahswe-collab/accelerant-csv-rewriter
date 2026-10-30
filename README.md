@@ -12,6 +12,7 @@ python -m pip install -r requirements.txt
 python main.py                  # input.csv -> output.csv (drops rows 3 and 7 as an example)
 python -m pytest -q             # 55 tests
 python benchmark.py             # timing on a 1,000,000-row synthetic file
+streamlit run ui.py             # optional web UI (see below)
 ```
 
 Other options:
@@ -29,6 +30,12 @@ python main.py --strict                     # fail instead of retrying the heade
 The header in the supplied file uses a backslash-escaped quote (`lizard,\"Iguana\"`), which is not standard CSV. `python main.py` handles it on its own: it tries standard parsing first, and if the *header* fails, it retries with backslash escaping applied to the header only and prints a warning. Data values are never touched. Use `--legacy-header` to force this up front, or `--strict` to turn the retry off.
 
 The task doesn't say which rows are unwanted, so `--drop 3 7` is just a demonstration default. Replace it with the real requirement.
+
+## Web UI (optional)
+
+`streamlit run ui.py` opens a small front end over the same class: upload a CSV (or tick the sample), see every header's match, score and status (OK / Review / No match), pick rows to drop, compare before and after, and download the cleaned file. It only calls the public `CSVRewriter` methods, so it behaves exactly like the CLI.
+
+![CSV Rewriter UI](docs/ui.png)
 
 ## Class interface
 
