@@ -1,0 +1,4 @@
+pandas>=2.0
+fuzzywuzzy>=0.18
+python-Levenshtein>=0.21
+pytest>=7.0
